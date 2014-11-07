@@ -17,13 +17,15 @@ Dotenv.load(ENV['CONFIG'])
 
 task :default => :scrap
 
-task :scrap => :dotenv do
+task :scrape, [:term] => :dotenv do |t, args|
   # You can obtain you access id and secret key here: http://moz.com/products/api/keys
   ACCESS_ID = ENV['ACCESS_ID']
   SECRET_KEY = ENV['SECRET_KEY']
 
   # TODO: grab terms from database
-  term = "insurance binder"
+  term = args[:term]
+  raise "please include a term when calling rake task" if term.nil?
+
   urls = Scraper.scrape(term)
   # for testing
   #urls = Scraper::SAMPLE_URLS
