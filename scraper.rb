@@ -19,7 +19,7 @@ class Scraper
   ].flatten
 
   def initialize(term, count=DEFAULT_COUNT)
-    @term = term
+    @term = URI::encode(term)
     @count = count
   end
 

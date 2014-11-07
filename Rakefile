@@ -23,8 +23,7 @@ task :scrap => :dotenv do
   SECRET_KEY = ENV['SECRET_KEY']
 
   # TODO: grab terms from database
-  term = URI::encode("insurance binder")
-
+  term = "insurance binder"
   urls = Scraper.scrape(term)
   # for testing
   #urls = Scraper::SAMPLE_URLS
