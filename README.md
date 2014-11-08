@@ -6,8 +6,11 @@
 1. run `bundle install`
 2. run `cp config.env.example config.env`
 3. add access ID and secret key to `config.env`
-4. run `CONFIG=./config.env bundle exec rake scrape[ride a bike]`
-   Note: for zsh run `CONFIG=./config.env bundle exec rake scrape\[ride+a+bike\]` (handle brackets and spaces)
+4. run `CONFIG=./config.env bundle exec rake scrape['ride a bike,food,keyboard']`
+  * Some rake idiosyncrasies to keep in mind:
+  * terms should be surrounded by single quotes (to handle spaces)
+  * do not put spaces between commas
+  * for zsh we need to escape brackets `CONFIG=./config.env bundle exec rake scrape\['ride a bike,food,keyboard'\]`
 
 ### Expected Results
 

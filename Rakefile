@@ -23,15 +23,17 @@ task :scrape, [:term] => :dotenv do |t, args|
   SECRET_KEY = ENV['SECRET_KEY']
 
   # TODO: grab terms from database
-  term = args[:term]
-  raise "please include a term when calling rake task" if term.nil?
+  terms = Array(args[:term]) + args.extras
+  raise "please include term(s) when calling 'scrape' rake task" if terms.empty?
 
-  urls = Scraper.scrape(term)
-  # for testing
-  #urls = Scraper::SAMPLE_URLS
+  terms.each do |term|
+    urls = Scraper.scrape(term)
+    # for testing
+    #urls = Scraper::SAMPLE_URLS
 
-  metrics = Moz.metrics(ACCESS_ID, SECRET_KEY, urls)
+    metrics = Moz.metrics(ACCESS_ID, SECRET_KEY, urls)
 
-  puts metrics
-  # TODO: put metrics into db
+    puts metrics
+    # TODO: put metrics into db
+  end
 end
